@@ -2,12 +2,15 @@
 Educational Riddles on Line
 
 ## Node
-We are going to use node [`7.10.0+`][2].
+Node [`v8.1.2+`][2] or higher
 
 ## Framework and Libraries
 This Project is build using :
 - Koa ([github][1])
 - LineSDK ([github][4])
+
+## Styleguide
+[JavaScript Standard Style][5].
 
 ## General Setup
 
@@ -16,6 +19,7 @@ Make sure you are running at least Node 7.6 and NPM 4. [`nodemon`][3] is optiona
 Get started by running `npm install`.
 
 [1]: https://github.com/koajs
-[2]: http://knexjs.org
+[2]: https://nodejs.org/en/
 [3]: https://nodemon.io/
 [4]: https://github.com/line/line-bot-sdk-nodejs
+[5]: http://standardjs.com
