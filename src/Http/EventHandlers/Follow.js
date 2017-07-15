@@ -13,6 +13,7 @@ module.exports = async function (event) {
       text: 'Yuk mulai tebak-tebakan. Silakan balas \'HAI\' untuk mulai.'
     }
   ]
+
   const { replyToken } = event
   let isSend = false
   try {

@@ -7,9 +7,6 @@ module.exports = class LineCtrl {
 
     /* Loop Webhook Events */
     _.each(events, async (event, n) => {
-      const userId = (event.source && event.source.userId) ? event.source.userId : false
-      let result = false
-
       switch (event.type) {
         case 'follow':
           await loader('EventHandlers/Follow')(event)
