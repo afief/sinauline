@@ -1,5 +1,13 @@
+const loader = require('../Helpers/Loader')
+
 module.exports = function (router) {
-  router.get('/', (ctx, next) => {
-    ctx.json({ version: '0.1', timestamp: (new Date()).getTime() })
-  })
+  router.get(
+    '/',
+    loader('Controllers/IndexCtrl@index')
+    )
+
+  router.get(
+    '/webhooks',
+    loader('Controllers/LineCtrl@webhooks')
+    )
 }
