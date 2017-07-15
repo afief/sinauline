@@ -24,9 +24,13 @@ const sendQuestion = async function (replyToken) {
       altText: 'Sinauline, Pertanyaan baru!',
       template: {
         type: 'buttons',
-        text: question,
+        text: question.question,
         actions: templateActions
       }
+    }
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(JSON.stringify(message, null, 2))
     }
 
     const result = await client.replyMessage(replyToken, message)
