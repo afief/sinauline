@@ -20,6 +20,7 @@
   "license": "CC BY-NC-SA 4.0",
   "homepage": "http://sinaulin.com",
   "dependencies": {
+    "@line/bot-sdk": "^2.0.0",
     "dotenv": "^4.0.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
