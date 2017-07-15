@@ -1,0 +1,32 @@
+{
+  "name": "sinauline",
+  "version": "0.0.1",
+  "description": "Riddles on the Line",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:afief/sinauline.git"
+  },
+  "keywords": [
+    "sinau",
+    "line",
+    "riddles",
+    "game"
+  ],
+  "author": "Afief Yona Ramadhana",
+  "license": "CC BY-NC-SA 4.0",
+  "homepage": "http://sinaulin.com",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-qs": "^2.0.0",
+    "koa-router": "^7.2.1",
+    "koa-static": "^4.0.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1"
+  }
+}
