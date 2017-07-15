@@ -6,8 +6,9 @@ module.exports = function (router) {
     loader('Controllers/IndexCtrl@index')
     )
 
-  router.get(
+  router.post(
     '/webhooks',
+    loader('Middlewares/AsyncReturn')(1000),
     loader('Controllers/LineCtrl@webhooks')
     )
 }
