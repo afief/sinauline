@@ -11,7 +11,6 @@ module.exports = class Questions {
         .offset(randomNumber)
         .limit(1)
         .first(['id', 'question'])
-      console.log('~~', question)
       return question
     }
   }

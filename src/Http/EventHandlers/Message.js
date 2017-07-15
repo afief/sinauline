@@ -8,7 +8,7 @@ const sendQuestion = async function (replyToken) {
   console.log('RANDOMIZE QUESTION', JSON.stringify(q, null, 2))
 
   if (q) {
-    const { question, choices } = questions
+    const { question, choices } = q
 
     const templateActions = []
     _.each(choices, (choice, i) => {
@@ -28,6 +28,7 @@ const sendQuestion = async function (replyToken) {
         actions: templateActions
       }
     }
+
     const result = await client.replyMessage(replyToken, message)
     if (result) {
       return true
