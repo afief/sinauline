@@ -61,6 +61,22 @@ const sendException = async function (replyToken) {
   return false
 }
 
+const getScore = async function (replyToken, userId) {
+  const score = await answer.getScore(userId)
+  if (score) {
+    try {
+      await client.replyMessage(replyToken, {
+        type: 'text',
+        text: `Kamu sudah berhasil menjawab ${score} pertanyaan dengan benar!`
+      })
+      return true
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
+  return false
+}
+
 const sendForCorrectAnswer = async function (replyToken) {
   const replyMessage = [{
     type: 'sticker',
@@ -102,30 +118,37 @@ module.exports = async function (event) {
   if (event.message.type !== 'text') {
     sendException(replyToken)
     return false
-  } else if (event.message.text.toLowerCase() === 'hai') {
-    /* ASK NEW QUESTION */
-    result = await sendQuestion(replyToken, userId)
-    return result
   } else {
-    const waitingQuestion = await answer.checkWaitingQuestion(userId)
-    if (waitingQuestion) {
-      /* ANSWER QUESTION */
-      const answerResult = await answer.answer(waitingQuestion, event.message.text)
-      if (answerResult.length > 0) {
-        if (answerResult[0]) {
-          await sendForCorrectAnswer(replyToken)
-          return true
+    switch (event.message.text.toLowerCase()) {
+      case 'hai' :
+        /* ASK NEW QUESTION */
+        result = await sendQuestion(replyToken, userId)
+        return result
+      case 'score' :
+        /* GET SCORE */
+        result = await getScore(replyToken, userId)
+        return result
+      default :
+        const waitingQuestion = await answer.checkWaitingQuestion(userId)
+        if (waitingQuestion) {
+          /* ANSWER QUESTION */
+          const answerResult = await answer.answer(waitingQuestion, event.message.text)
+          if (answerResult.length > 0) {
+            if (answerResult[0]) {
+              await sendForCorrectAnswer(replyToken)
+              return true
+            } else {
+              await sendForWrongAnswer(replyToken)
+              return false
+            }
+          } else {
+            await client.replyMessage(replyToken, {type: 'text', text: 'Jawaban kamu tidak ada dalam pilihan.'})
+            return false
+          }
         } else {
-          await sendForWrongAnswer(replyToken)
+          sendException(replyToken)
           return false
         }
-      } else {
-        await client.replyMessage(replyToken, {type: 'text', text: 'Jawaban kamu tidak ada dalam pilihan.'})
-        return false
-      }
-    } else {
-      sendException(replyToken)
-      return false
     }
   }
 }

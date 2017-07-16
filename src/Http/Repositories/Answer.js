@@ -22,6 +22,17 @@ module.exports = class Questions {
     return false
   }
 
+  async getScore (userId) {
+    const score = (await db.table('user_answers')
+      .where('user_id', userId)
+      .where('correct', true)
+      .where('deleted_at', null)
+      .count()
+      .first()
+    )['count']
+    return score
+  }
+
   async answer (row, text) {
     const choice = await db.table('choices')
       .where({
