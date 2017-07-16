@@ -14,9 +14,9 @@ module.exports = class Questions {
   async checkWaitingQuestion (userId) {
     const result = await db.table('user_answers')
       .where('user_id', userId)
-      .where('choice_id', null)
-      .first(['id', 'question_id'])
-    if (result && result.id) {
+      .orderBy('created_at', 'desc')
+      .first(['id', 'question_id', 'choice_id'])
+    if (result && result.id && !result.choice_id) {
       return result
     }
     return false
